@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="xiaochui_blue">#5da3e9</color>
+    <color name="xiaochui_blue_press">#2a85df</color>
+    <color name="gray_background">#f6f6f6</color>
+
+    <color name="gray_8C">#8C8C8C</color>
+    <color name="c666666">#666666</color>
+    <color name="c000000">#000000</color>
+    <color name="cf0f0f0">#f0f0f0</color>
+    <color name="c333333">#333333</color>
+    <color name="cCccccc">#cccccc</color>
+    <color name="ceeeeee">#eeeeee</color>
+    <color name="c777777">#777777</color>
+    <color name="c888888">#888888</color>
+    <color name="c999999">#999999</color>
+    <color name="cf6f6f6">#f6f6f6</color>
+    <color name="cdddddd">#dddddd</color>
+    <color name="answerwrong">#ff5a5d</color>
+
+    <color name="press_effect">#d4d4d4</color>
+
+    <color name="label_text">#4A4A4A</color>
+    <color name="label_alway_selected">#FF5E71</color>
+    <color name="title_text">#5da3e9</color>
+</resources>

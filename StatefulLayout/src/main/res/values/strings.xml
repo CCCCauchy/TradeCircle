@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StatefulLayout</string>
+    <string name="stfErrorMessage">数据错误，请稍后再试</string>
+    <string name="stfOfflineMessage">Please check your connection</string>
+    <string name="stfLocationOffMessage">Please enable location services</string>
+    <string name="stfEmptyMessage">没有数据</string>
+    <string name="stfLoadingMessage">加载中..</string>
+    <string name="stfButtonText">重试</string>
+</resources>
