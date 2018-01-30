@@ -1,6 +1,7 @@
 package com.xiaochui.tradecircle.ui;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
 
 /**
  * @author cauchy
@@ -29,6 +31,23 @@ public class BottomBarBehavior extends CoordinatorLayout.Behavior<View> {
     public BottomBarBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
+    //确定所提供的子视图是否有另一个特定的同级视图作为布局从属。
+//    @Override
+//    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
+////这个方法是说明这个子控件是依赖AppBarLayout的
+//        return dependency instanceof FrameLayout;
+//    }
+//
+//    //用于响应从属布局的变化
+//    @Override
+//    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
+//
+//        float translationY = Math.abs(dependency.getTop());//获取更随布局的顶部位置
+//
+//        child.setTranslationY(translationY);
+//        return true;
+//    }
 
     //在嵌套滑动开始前回调
     @Override
@@ -56,11 +75,12 @@ public class BottomBarBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public boolean onInterceptTouchEvent(CoordinatorLayout parent, View child, MotionEvent ev) {
+
         Log.i("sysout", "  onInterceptTouchEvent.." + ev);
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             downY = ev.getY();
         }
-        if (ev.getAction() == MotionEvent.ACTION_MOVE && !isAnimate) {
+        if (!isAnimate && ev.getAction() != MotionEvent.ACTION_DOWN) {
             if (ev.getY() > downY && child.getVisibility() == View.GONE) {
                 show(child);
                 downY = ev.getY();
@@ -81,27 +101,31 @@ public class BottomBarBehavior extends CoordinatorLayout.Behavior<View> {
 
     //隐藏时的动画
     private void hide(final View view) {
-        ViewPropertyAnimator animator = view.animate().translationY(viewY).setInterpolator(INTERPOLATOR).setDuration(500);
+        ViewPropertyAnimator animator = view.animate().translationY(view.getHeight()).setInterpolator(INTERPOLATOR).setDuration(500);
 
         animator.setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
+                Log.w("sysout", "hide onAnimationStart");
                 isAnimate = true;
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
+                Log.w("sysout", "hide onAnimationEnd");
                 view.setVisibility(View.GONE);
                 isAnimate = false;
             }
 
             @Override
             public void onAnimationCancel(Animator animator) {
+                Log.w("sysout", "hide onAnimationCancel");
                 show(view);
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
+                Log.w("sysout", "hide onAnimationRepeat");
             }
         });
         animator.start();
@@ -113,22 +137,26 @@ public class BottomBarBehavior extends CoordinatorLayout.Behavior<View> {
         animator.setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
+                Log.w("sysout", "show onAnimationStart");
                 view.setVisibility(View.VISIBLE);
                 isAnimate = true;
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
+                Log.w("sysout", "show onAnimationEnd");
                 isAnimate = false;
             }
 
             @Override
             public void onAnimationCancel(Animator animator) {
+                Log.w("sysout", "show onAnimationCancel");
                 hide(view);
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
+                Log.w("sysout", "show onAnimationRepeat");
             }
         });
         animator.start();

@@ -172,11 +172,11 @@ public class MainActivity extends BaseActivity<BasePresenter> implements BottomN
 
     @Override
     public void onTabUnselected(int position) {
-        bindService(new Intent(this, LocationService.class), serviceConnection, BIND_AUTO_CREATE);
+//        bindService(new Intent(this, LocationService.class), serviceConnection, BIND_AUTO_CREATE);
     }
 
     @Override
     public void onTabReselected(int position) {
-        unbindService(serviceConnection);
+//        unbindService(serviceConnection);
     }
 }
